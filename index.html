@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Открытие ссылки</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="urlInput" placeholder="Введите URL">
+  <button id="submitButton">Submit</button>
+
+  <!-- Здесь будет добавлена кнопка для открытия ссылки -->
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+      const url = document.getElementById('urlInput').value.trim();
+      
+      if (url === "") {
+        alert("Пожалуйста, введите URL");
+        return;
+      }
+      
+      // Если ссылка не начинается с http:// или https://, добавим протокол по умолчанию.
+      let validUrl = url;
+      if (!/^https?:\/\//i.test(validUrl)) {
+        validUrl = "http://" + validUrl;
+      }
+      
+      // Очистим предыдущий результат (если кнопка уже создана)
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = "";
+      
+      // Создаем новую кнопку
+      const openLinkButton = document.createElement('button');
+      openLinkButton.textContent = "Открыть ссылку";
+      
+      openLinkButton.addEventListener('click', function() {
+        window.open(validUrl, '_blank'); // Открываем ссылку в новой вкладке
+      });
+      
+      resultDiv.appendChild(openLinkButton);
+    });
+  </script>
+  
+</body>
+</html>

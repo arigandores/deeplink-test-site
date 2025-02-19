@@ -20,7 +20,7 @@
   <input type="text" id="urlInput" placeholder="Введите URL">
   <button id="submitButton">Submit</button>
 
-  <!-- Здесь будет добавлена кнопка для открытия ссылки -->
+  <!-- Здесь будут добавлены кнопки для открытия ссылки -->
   <div id="result"></div>
 
   <script>
@@ -38,19 +38,25 @@
         validUrl = "http://" + validUrl;
       }
       
-      // Очистим предыдущий результат (если кнопка уже создана)
+      // Очистим предыдущий результат (если кнопки уже созданы)
       const resultDiv = document.getElementById('result');
       resultDiv.innerHTML = "";
       
-      // Создаем новую кнопку
-      const openLinkButton = document.createElement('button');
-      openLinkButton.textContent = "Открыть ссылку";
-      
-      openLinkButton.addEventListener('click', function() {
-        window.open(validUrl, '_blank'); // Открываем ссылку в новой вкладке
+      // Создаем кнопку для открытия ссылки в новой вкладке
+      const openNewTabButton = document.createElement('button');
+      openNewTabButton.textContent = "Открыть ссылку в новой вкладке";
+      openNewTabButton.addEventListener('click', function() {
+        window.open(validUrl, '_blank');
       });
-      
-      resultDiv.appendChild(openLinkButton);
+      resultDiv.appendChild(openNewTabButton);
+
+      // Создаем кнопку для открытия ссылки в текущей вкладке
+      const openCurrentTabButton = document.createElement('button');
+      openCurrentTabButton.textContent = "Открыть ссылку в текущей вкладке";
+      openCurrentTabButton.addEventListener('click', function() {
+        window.location.href = validUrl;
+      });
+      resultDiv.appendChild(openCurrentTabButton);
     });
   </script>
   
